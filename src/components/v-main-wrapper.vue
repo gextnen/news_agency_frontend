@@ -1,18 +1,25 @@
 <template>
-  <div id="app">
-    <p>Hello from App.vue!</p>
-    <v-main-wrapper/>
+  <div id="v-main-wrapper">
+    <p> {{ title }}</p>
   </div>
 </template>
 
 <script>
-import vMainWrapper from './components/v-main-wrapper'
 
 export default {
-  name: 'App',
-  components: {
-    vMainWrapper
+  name: 'v-main-wrapper',
+  components: {},
+  props: {},
+  data() {
+    return {
+      title: "Main wrapper"
+    }
+  },
+  computed: {},
+  mounted() {
+    console.log("Hello from main-wrapper")
   }
+
 }
 </script>
 
