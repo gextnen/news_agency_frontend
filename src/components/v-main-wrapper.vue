@@ -1,35 +1,41 @@
 <template>
-  <div id="v-main-wrapper">
-    <p> {{ title }}</p>
+  <div class="v-main-wrapper">
+    <a>adsjnasjnkasnksad</a>
+    <v-aggregator-news/>
   </div>
 </template>
 
 <script>
-
+import vAggregatorNews from "@/components/v-catalog-news"
 export default {
   name: 'v-main-wrapper',
-  components: {},
+  components: {
+    vAggregatorNews,
+  },
   props: {},
   data() {
     return {
-      title: "Main wrapper"
+        title: "Main wrapper"
     }
   },
   computed: {},
   mounted() {
-    console.log("Hello from main-wrapper")
+
   }
 
 }
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.v-main-wrapper{
+  flex:1 0 auto;
 }
 </style>
