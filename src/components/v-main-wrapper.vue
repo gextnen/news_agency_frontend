@@ -1,16 +1,13 @@
 <template>
   <div class="v-main-wrapper">
-    <a>adsjnasjnkasnksad</a>
-    <v-aggregator-news/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import vAggregatorNews from "@/components/v-catalog-news"
 export default {
   name: 'v-main-wrapper',
   components: {
-    vAggregatorNews,
   },
   props: {},
   data() {
@@ -37,5 +34,6 @@ export default {
 }
 .v-main-wrapper{
   flex:1 0 auto;
+  background-color: #f7f7f7;
 }
 </style>

@@ -23,7 +23,7 @@ export default {
 
 }
 .footer__row{
-  height: 100px;
+  height: 95px;
   display: flex;
   justify-content: center;
   align-items: center;

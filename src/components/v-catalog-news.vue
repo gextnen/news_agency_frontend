@@ -9,16 +9,16 @@
                   :key ="article.id"
                   :article_data = "article"
               />
-              <v-news-item
-                  v-for = "article in ARTICLES"
-                  :key ="article.id"
-                  :article_data = "article"
-              />
-              <v-news-item
-                  v-for = "article in ARTICLES"
-                  :key ="article.id"
-                  :article_data = "article"
-              />
+<!--              <v-news-item-->
+<!--                  v-for = "article in ARTICLES"-->
+<!--                  :key ="article.id"-->
+<!--                  :article_data = "article"-->
+<!--              />-->
+<!--              <v-news-item-->
+<!--                  v-for = "article in ARTICLES"-->
+<!--                  :key ="article.id"-->
+<!--                  :article_data = "article"-->
+<!--              />-->
             </div>
 
           </div>
@@ -62,11 +62,14 @@ export default {
 
 <style>
 body{
-  background-color: #f7f7f7;
+  /*background-color: #f7f7f7;*/
 }
+
 .container{
   padding: 0;
   margin: 0 auto;
+  background-color: #ffffff;
+  height: 100%;
 }
 
 .section-grid__row{
@@ -87,6 +90,8 @@ body{
   /*background-color: #ffffff;*/
 
 }
+
+
 @media screen and (max-device-width: 1024px ){
   .section-grid__row{
     flex-wrap: wrap;

@@ -2,7 +2,9 @@
   <div class="news-item">
     <div class="news-item__body">
       <p class = "news-item__date">{{article_data.publishedAt}}</p>
-      <a  href ="#" class = "news-item__title">{{article_data.title}}</a>
+      <router-link :to="`/article/${article_data.id}`">
+        <h3 class = "news-item__title">{{article_data.title}}</h3>
+      </router-link>
 <!--      <p class = "news-item__content">{{article_data.content}}</p>-->
     </div>
     <div class="news-item__image">
@@ -12,8 +14,9 @@
 
 </template>
 
+
 <script>
-export default {
+export default  {
   name: "v-news-item",
   props: {
     article_data: {
@@ -25,10 +28,13 @@ export default {
   }
 
 }
+
 </script>
 
 <style>
-
+.router-link-active{
+  color:#23387c ;
+}
 a{
   color: #000000;
   text-decoration: none;
