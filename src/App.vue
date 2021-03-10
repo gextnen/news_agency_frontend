@@ -12,14 +12,15 @@
 import vMainWrapper from './components/v-main-wrapper'
 import vHeader from './components/v-header'
 import vFooter from './components/v-footer'
-
 export default {
   name: 'App',
   components: {
     vHeader,
     vMainWrapper,
     vFooter,
-  }
+
+  },
+
 }
 </script>
 

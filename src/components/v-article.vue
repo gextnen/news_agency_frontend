@@ -11,7 +11,8 @@
         </div>
       </div>
       <div class="article-image">
-        <img  :src =ARTICLES[id-1].coverImage alt="" />
+        <img  :src="ARTICLES[id-1].coverImage" alt="" />
+<!--        <img  src="" alt="" />-->
       </div>
       <div class="article-text">
         <div class="article-text__content">
@@ -52,12 +53,14 @@ export default {
   },
   methods: {
     ...mapActions([
-      'GET_ARTICLES_FROM_API'
+      'GET_ARTICLES_FROM_API',
+
     ]),
   },
   mounted() {
     this.GET_ARTICLES_FROM_API()
-    console.log(this.$store.state.articles)
+    console.log("GET_ARTICLES_FROM_API mounted v-article",this.$store.state.articles)
+
   }
 }
 

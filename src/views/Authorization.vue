@@ -6,7 +6,7 @@
 import vLogin from "@/components/Login"
 
 export default {
-  name: "Authorization",
+  name: "Login",
   components: {
     vLogin,
   }

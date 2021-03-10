@@ -2,10 +2,11 @@
   <div class="container">
     <div class="login-page">
       <div class="form">
-        <form class="login-form">
-          <input type="text" placeholder="Username"/>
-          <input type="password" placeholder="Password"/>
-          <button>login</button>
+        <form class="login-form" >
+          <input required v-model="login" type="text" placeholder="Login"/>
+          <input required v-model="password" type="password" placeholder="Password"/>
+
+          <button type="submit" @click="handleSubmit">login</button>
           <p class="message">Not registered? <a href="#">Create an account</a></p>
         </form>
       </div>
@@ -18,26 +19,49 @@ export default {
   name: "Login",
   data() {
     return {
-      logn: "",
+      login: "",
       password: ""
     }
   },
   methods: {
-    login: function() {
-      let logn = self.login
-      let password = self.password
-      this.$store.dispatch('logn', {logn, password}).then(()=> this.$router.push('/')).catch(err=>console.log(err))
-    }
-  }
+    handleSubmit(e) {
+      console.log("hello from handleSubmit() e:", e)
+      e.preventDefault()
+      if (this.password.length > 0) {
+        this.$http.post('http://localhost:5500/login', {
+          login: this.login,
+          password: this.password
+        })
+            .then(
+                response => console.log(response)
+
+      )
+            .catch(function (error) {
+              console.error(error.response);
+            });
+      }
+
+
+    },
+
+  },
 }
 </script>
 
-<style >
+<style>
+.container {
+  background-color: #ffffff;
+  padding: 0;
+  margin: 0 auto;
+  height: 100%;
+}
+
 .login-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
+
 .form {
   position: relative;
   z-index: 1;
@@ -48,6 +72,15 @@ export default {
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+@media screen and (max-width: 700px) {
+  .form {
+    box-shadow: none;
+    padding: 30px;
+
+  }
+}
+
 .form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -59,6 +92,7 @@ export default {
   box-sizing: border-box;
   font-size: 14px;
 }
+
 .form button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -71,21 +105,22 @@ export default {
   font-size: 14px;
   cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
+
+.form button:hover, .form button:active, .form button:focus {
   background: #25167c;
 }
+
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
   font-size: 12px;
 }
+
 .form .message a {
   color: #3020ac;
   text-decoration: none;
 }
-.form .register-form {
-  display: none;
-}
+
 
 .login-box a span {
   position: absolute;

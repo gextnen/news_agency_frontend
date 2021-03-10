@@ -61,6 +61,7 @@ a:hover{
 .news-item__body{
   font-size:23px;
   flex: 1 1 auto;
+  padding-right: 25px;
 }
 .news-item__image{
   flex: 0 0 33.33%;
