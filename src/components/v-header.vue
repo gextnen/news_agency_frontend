@@ -6,7 +6,7 @@
         <router-link to="/" :disabled="true" >
           <Logo/>
         </router-link>
-      </div> <!-- TODO Вставить лого свг-->
+      </div>
       <div class="navbar-nav">
         <li class="nav-item">
           <span>

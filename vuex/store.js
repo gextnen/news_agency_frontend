@@ -9,15 +9,23 @@ Vue.use(Vuex);
 let store = new Vuex.Store({
     state:{
         articles: [],
+        tokens: [],
     },
     mutations: {
         SET_ARTICLES_TO_STATE: (state, articles )=> {
             state.articles = articles
         },
         DEL_ARTICLE_FROM_STATE: (state, id)=>{
+            console.log(state.articles)
             let index = state.articles.findIndex(articles => articles.id == id)
             console.log("hello from DEL_ARTICLE_FROM_STATE ",state.articles, id)
-            state.articles.slice(index,1)
+            console.log(index)
+            state.articles.splice(index,1)
+            console.log("hello from DEL_ARTICLE_FROM_STATE ",state.articles, id)
+        },
+
+        SET_TOKENS_TO_STATE: (state, token)=>{
+            state.tokens = token
         }
 
     },
@@ -55,13 +63,13 @@ let store = new Vuex.Store({
                 reject(err)
             })
         },
-        DelNews({commit}, id){
-            axios({url: 'http://localhost:3000/articles/'+ id, method: 'GET'})
-                .then(()=>{
-                    console.log("then DelNews", id)
-                    commit('DEL_ARTICLE_FROM_STATE', id)
+        AddToken({commit}, token){
+            axios({url: 'http://localhost:3000/tokens', data: token, method: 'POST'})
+                .then(resp => {
+                    commit('SET_TOKENS_TO_STATE', resp.data)
                 })
         }
+
 
         // login({commit}, user){
         //     return new Promise((resolve, reject) => {

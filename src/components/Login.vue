@@ -33,13 +33,20 @@ export default {
           password: this.password
         })
             .then(
-                response => console.log(response)
+                response => {
+                  if (response.status === 200){
+                    console.log(response.config.data, response)
+                  }
+                }
+
+
 
       )
             .catch(function (error) {
               console.error(error.response);
             });
       }
+      // console.log(this.$http.get('http://localhost:5500/login'))
 
 
     },

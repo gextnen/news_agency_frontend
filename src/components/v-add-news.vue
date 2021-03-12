@@ -59,7 +59,14 @@ export default {
       let coverImage = this.coverImage
       console.log("hello from addNewsMethod")
       this.$store.dispatch('AddNews', {title, description, content, author, publishedAt, coverImage})
+      this.title = ''
+      this.description = ''
+      this.content = ''
+      this.author = ''
+      this.publishedAt = ''
+      this.coverImage = ''
     }
+
   },
 
   mounted() {

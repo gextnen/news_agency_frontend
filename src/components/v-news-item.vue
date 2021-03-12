@@ -8,7 +8,7 @@
 <!--      <p class = "news-item__content">{{article_data.content}}</p>-->
     </div>
     <div class="news-item__image">
-      <img :src =article_data.coverImage alt="" />
+      <img src ="/image_1.jpg" alt="" />
     </div>
   </div>
 

@@ -44,18 +44,17 @@ server.use((req, res, next) => {
 // Admin authorization
 server.post('/login', (req, res) => {
     const credentials = req.body;
-    console.log("hello from server.post credentials: ", credentials)
-    console.log( router.db.get('users').value())
+
     router.db.get('users').value().forEach((user) => {
         if (user.login === credentials.login && user.password === credentials.password) {
             // Generate token
-            console.log("token: ");
 
             const token = makeToken(100);
+            console.log("db.json: ", router.db.get('tokens').value())
 
             // Add token to DB
             router.db.get('tokens').push(token).write();
-            console.log("token: ", token);
+            console.log("after db.json: ", router.db.get('tokens').value())
 
             res.json({
                 accessToken: token
