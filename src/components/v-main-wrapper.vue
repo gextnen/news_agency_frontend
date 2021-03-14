@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: 'v-main-wrapper',
   components: {
@@ -15,8 +17,14 @@ export default {
         title: "Main wrapper"
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters([
+      'ARTICLES',
+      // 'SEARCH_VALUE',
+    ]),
+  },
   mounted() {
+    this.sortedArticles = this.ARTICLES
 
   }
 

@@ -10,6 +10,7 @@ let store = new Vuex.Store({
     state:{
         articles: [],
         tokens: [],
+        searchValue: '',
     },
     mutations: {
         SET_ARTICLES_TO_STATE: (state, articles )=> {
@@ -26,6 +27,10 @@ let store = new Vuex.Store({
 
         SET_TOKENS_TO_STATE: (state, token)=>{
             state.tokens = token
+        },
+
+        SET_SEARCH_VALUE_TO_VUEX: (state, value)=> {
+            state.searchValue = value;
         }
 
     },
@@ -68,6 +73,9 @@ let store = new Vuex.Store({
                 .then(resp => {
                     commit('SET_TOKENS_TO_STATE', resp.data)
                 })
+        },
+        GET_SEARCH_VALUE_TO_VUEX({commit}, value){
+            commit('SET_SEARCH_VALUE_TO_VUEX', value)
         }
 
 
@@ -108,11 +116,14 @@ let store = new Vuex.Store({
         ARTICLES(state) {
             return state.articles;
         },
-        TOKEN(state){
-          return state.token;
-        },
-        isLoggedIn: state => !!state.token,
-        authStatus: state => state.status,
+        // TOKEN(state){
+        //   return state.token;
+        // },
+        // isLoggedIn: state => !!state.token,
+        // authStatus: state => state.status,
+        SEARCH_VALUE(state) {
+            return state.searchValue;
+        }
     }
 });
 

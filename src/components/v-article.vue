@@ -5,6 +5,15 @@
         <div class="article-header__date">
           <p class = "">{{ ARTICLES[id-1].publishedAt}}</p>
         </div>
+        <div class="article-header__tags">
+<!--          <p class = "">{{ ARTICLES[id-1].tags}}</p>-->
+            <span
+                v-for = "tag in ARTICLES[id-1].tags"
+                :key ="tag"
+            >
+              {{tag.toLocaleUpperCase()}}
+            </span>
+        </div>
         <div class="article-title">
           <h1 class = "">{{ARTICLES[id-1].title}}</h1>
 <!--          <p class = "">{{ARTICLES[id-1].source}}</p>-->
@@ -43,7 +52,8 @@ export default {
   },
   data() {
     return {
-       id: this.$route.params['id']
+       id: this.$route.params['id'],
+       jopa: " <b> "
     }
   },
   computed: {
@@ -91,6 +101,11 @@ export default {
 }
 .article-header__date{
   color: #747e89;
+}
+
+.article-header__tags{
+  color: #23387c;
+  font-weight: 500;
 }
 .article-title{
   margin-top: 25px;

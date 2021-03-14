@@ -8,8 +8,9 @@
 <!--      <p class = "news-item__content">{{article_data.content}}</p>-->
     </div>
     <div class="news-item__image">
-      <img src ="/image_1.jpg" alt="" />
+      <img :src =article_data.coverImage alt="" />
     </div>
+
   </div>
 
 </template>
@@ -25,7 +26,10 @@ export default  {
         return {}
       }
     }
-  }
+  },
+  // mounted() {
+  //   console.log('article_data: ', this.article_data.coverImage)
+  // }
 
 }
 
@@ -44,7 +48,7 @@ a:hover{
 }
 .news-item{
   text-align: left;
-  border-bottom: 1px solid #9f9d9d;
+  border-bottom: 1px solid #dfdfe6;
   padding: 15px;
   display: flex;
 

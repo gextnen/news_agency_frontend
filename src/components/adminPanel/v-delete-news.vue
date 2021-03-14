@@ -2,7 +2,6 @@
   <div class="container">
     <div class="wrapper">
       <h2 class="admin-panel-header">Admin Panel</h2>
-      <form>
         <div class="form add-news-form">
           <form class="" @submit.prevent="delNewsMethod">
             <input required v-model="id" type="text" placeholder="id"/>
@@ -11,7 +10,6 @@
             <span v-else-if="temp === true"> This article successful deleted</span>
           </form>
         </div>
-      </form>
     </div>
   </div>
 </template>

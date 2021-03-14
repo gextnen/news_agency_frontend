@@ -1,11 +1,11 @@
 <template>
   <main class="container">
     <section class="section-grid__row">
-      <section class="section-main-news">
+      <section class="section-grid-col">
           <div class="v-catalog-news">
             <div class="v-catalog-news__list">
               <v-news-item
-                  v-for = "article in ARTICLES"
+                  v-for = "article in filteredArticles"
                   :key ="article.id"
                   :article_data = "article"
               />
@@ -38,24 +38,57 @@ export default {
     vNewsItem
   },
   props: {},
-  data() {
+  data: function () {
     return {
-
+      sortedArticles: [],
+      selected: '',
     }
   },
   computed: {
     ...mapGetters([
         'ARTICLES',
-    ])
+        'SEARCH_VALUE',
+    ]),
+    filteredArticles() {
+      if (this.sortedArticles.length) {
+        return this.sortedArticles
+      } else {
+        return this.ARTICLES
+      }
+    },
   },
   methods: {
     ...mapActions([
-      'GET_ARTICLES_FROM_API'
+      'GET_ARTICLES_FROM_API',
     ]),
+    sortArticlesByValue(value) {
+      this.sortedArticles = [...this.ARTICLES]
+      if (value){
+        this.sortedArticles = this.sortedArticles.filter(function (item){
+          return item.title.toLowerCase().includes(value.toLowerCase())
+        })
+      }
+      else {
+        this.sortedArticles = this.ARTICLES
+      }
+
+    },
+
+  },
+  watch: {
+    SEARCH_VALUE(){
+      this.sortArticlesByValue(this.SEARCH_VALUE);
+    }
   },
   mounted() {
+    console.log("hello from mounted ARTICLES: ", this.ARTICLES)
+    this.filteredProducts
+    this.sortedArticles = this.ARTICLES
     this.GET_ARTICLES_FROM_API()
-    console.log(this.$store.state.articles)
+    console.log("hello from mounted", this.filteredProducts)
+    this.sortArticlesByValue(this.SEARCH_VALUE)
+    console.log("hello from mounted sortArticlesByValue", this.SEARCH_VALUE)
+
   }
 }
 </script>
@@ -77,8 +110,9 @@ body{
   flex-wrap: nowrap;
   background-color: #ffffff;
 }
-.section-main-news{
+.section-grid-col{
   width: 66.666%;
+  border-right: 1px solid #dfdfe6;
 }
 
 .section-news-right{
@@ -96,8 +130,9 @@ body{
   .section-grid__row{
     flex-wrap: wrap;
   }
-  .section-main-news{
+  .section-grid-col{
     width: 100%;
+    border-right: 0;
   }
 }
 </style>

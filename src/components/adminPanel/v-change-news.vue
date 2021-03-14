@@ -7,7 +7,10 @@
           <input required v-model="id" type="text" placeholder="id"/>
           <input required v-model="title" type="text" placeholder="Title"/>
           <input required v-model="description" type="text" placeholder="Description"/>
-          <input required v-model="content" type="text" placeholder="Content"/>
+          <textarea required v-model="content" type="textarea" placeholder="Content"  rows="8">
+          </textarea>
+<!--          <input required v-model="content" type="textarea" placeholder="Content"/>-->
+
           <input required v-model="author" type="text" placeholder="Author"/>
           <input required v-model="publishedAt" type="datetime-local" placeholder="PublishedAt"/>
           <input required v-model="coverImage" type="text" placeholder="Path to image"/>

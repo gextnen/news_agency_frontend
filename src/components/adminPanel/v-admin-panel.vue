@@ -33,6 +33,7 @@ export default {
 <style>
 .wrapper{
   padding-top: 70px;
+  /*max-width: 75%;*/
 }
 .admin-panel-header{
   color: #00077b;

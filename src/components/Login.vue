@@ -34,12 +34,11 @@ export default {
         })
             .then(
                 response => {
+                  console.log(this)
                   if (response.status === 200){
                     console.log(response.config.data, response)
                   }
                 }
-
-
 
       )
             .catch(function (error) {
@@ -88,7 +87,7 @@ export default {
   }
 }
 
-.form input {
+.form input, textarea {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
