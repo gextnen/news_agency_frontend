@@ -3,19 +3,20 @@
     <div class="search-filter__element">
       <div
           class = "search-filter__element-title"
+          v-bind:style="{ backgroundImage: 'url(' + iconSubmit + ')' }"
           @click ="areOptionsVisible = !areOptionsVisible" >
         {{selected}}
       </div>
         <div class="options"
              v-if="areOptionsVisible"
         >
-          <p
+          <span class = "search-filter__list"
               v-for="option in options"
               :key="option.value"
               @click = "selectOption(option)"
           >
             {{option.name}}
-          </p>
+          </span>
         </div>
     </div>
   </div>
@@ -38,13 +39,14 @@ export default {
   },
   data: function (){
     return {
-      areOptionsVisible: false
+      areOptionsVisible: false,
+      iconSubmit: "/arrow-down.svg"
     }
   },
   methods: {
     selectOption(option) {
       this.$emit('select', option)
-      this.areOptionsVisible = true
+      this.areOptionsVisible = false
       console.log(option)
     },
     hideSelect(){
@@ -77,8 +79,15 @@ export default {
   line-height: 16px;
   letter-spacing: 1px;
   padding: 16px 25px 13px 0;
+  background: no-repeat 76% 53%;
   text-transform: uppercase;
 
+}
+
+.search-filter__list{
+  display: flex;
+  flex-direction: column;
+  padding: 7px;
 }
 .options{
   background-color: #f7f7f7;
@@ -87,8 +96,11 @@ export default {
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 1px;
-  padding: 5px;
+  margin: 5px;
   position: absolute;
   width: 100%;
+}
+.options span:hover{
+  background: #c5c3c3;
 }
 </style>

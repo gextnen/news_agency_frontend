@@ -8,9 +8,7 @@
           <input required v-model="source" type="text" placeholder="Source"/>
           <input required v-model="description" type="text" placeholder="Description"/>
           <input required v-model="tags" type="text" placeholder="Tags"/>
-          <textarea required v-model="content" type="textarea" placeholder="Content"  rows="8">
-          </textarea>
-<!--          <input required v-model="content" type="text" placeholder="Content"/>-->
+          <textarea required v-model="content" type="textarea" placeholder="Content"  rows="8"></textarea>
           <input required v-model="author" type="text" placeholder="Author"/>
           <input required v-model="publishedAt" type="datetime-local" placeholder="PublishedAt"/>
           <input required v-model="coverImage" type="text" placeholder="Path to image"/>
@@ -80,6 +78,11 @@ export default {
 <style>
 .add-news-form {
   max-width: 75%;
+}
+@media screen and (max-width: 720px){
+  .add-news-form{
+    max-width: 100%;
+  }
 }
 
 /*.form {*/

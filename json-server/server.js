@@ -32,6 +32,7 @@ server.use((req, res, next) => {
 
         router.db.get('tokens').value().forEach((_token) => {
             if (token === 'Bearer ' + _token) {
+                console.log("authorized ", authorized)
                 authorized = true;
                 next();
             }

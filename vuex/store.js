@@ -7,50 +7,52 @@ Vue.use(Vuex);
 * store: repository of articles
 */
 let store = new Vuex.Store({
-    state:{
+    state: {
         articles: [],
-        tokens: [],
+        token: localStorage.getItem('token') || '',
         searchValue: '',
     },
     mutations: {
-        SET_ARTICLES_TO_STATE: (state, articles )=> {
+        SET_ARTICLES_TO_STATE: (state, articles) => {
             state.articles = articles
         },
-        DEL_ARTICLE_FROM_STATE: (state, id)=>{
+        DEL_ARTICLE_FROM_STATE: (state, id) => {
             console.log(state.articles)
             let index = state.articles.findIndex(articles => articles.id == id)
-            console.log("hello from DEL_ARTICLE_FROM_STATE ",state.articles, id)
+            console.log("hello from DEL_ARTICLE_FROM_STATE ", state.articles, id)
             console.log(index)
-            state.articles.splice(index,1)
-            console.log("hello from DEL_ARTICLE_FROM_STATE ",state.articles, id)
+            state.articles.splice(index, 1)
+            console.log("hello from DEL_ARTICLE_FROM_STATE ", state.articles, id)
         },
 
-        SET_TOKENS_TO_STATE: (state, token)=>{
-            state.tokens = token
-        },
-
-        SET_SEARCH_VALUE_TO_VUEX: (state, value)=> {
+        SET_SEARCH_VALUE_TO_VUEX: (state, value) => {
             state.searchValue = value;
-        }
+        },
+
+        LOGOUT(state) {
+            console.log("Hello from store.js LOGOUT")
+            state.token = ''
+        },
+
 
     },
     actions: {
-        GET_ARTICLES_FROM_API({commit}){
-            return axios('http://localhost:3000/articles',{
+        GET_ARTICLES_FROM_API({commit}) {
+            return axios('http://localhost:3000/articles', {
                 method: "GET"
             })
                 .then((articles) => {
                     commit('SET_ARTICLES_TO_STATE', articles.data);
-                    console.log("commit articles",articles.data );
+                    console.log("commit articles", articles.data);
 
                     return articles;
                 })
-                .catch((error)=>{
-                console.log(error);
-                return error;
-            })
+                .catch((error) => {
+                    console.log(error);
+                    return error;
+                })
         },
-        AddNews({commit}, article){
+        AddNews({commit}, article) {
             axios({url: 'http://localhost:3000/articles', data: article, method: 'POST'})
                 .then(resp => {
                     console.log("then AddNews", resp.data)
@@ -68,15 +70,15 @@ let store = new Vuex.Store({
                 reject(err)
             })
         },
-        AddToken({commit}, token){
-            axios({url: 'http://localhost:3000/tokens', data: token, method: 'POST'})
-                .then(resp => {
-                    commit('SET_TOKENS_TO_STATE', resp.data)
-                })
-        },
-        GET_SEARCH_VALUE_TO_VUEX({commit}, value){
+        // AddToken({commit}, token){
+        //     axios({url: 'http://localhost:3000/tokens', data: token, method: 'POST'})
+        //         .then(resp => {
+        //             commit('SET_TOKENS_TO_STATE', resp.data)
+        //         })
+        // },
+        GET_SEARCH_VALUE_TO_VUEX({commit}, value) {
             commit('SET_SEARCH_VALUE_TO_VUEX', value)
-        }
+        },
 
 
         // login({commit}, user){
@@ -100,27 +102,28 @@ let store = new Vuex.Store({
         //             })
         //     })
         // },
-        // logout({commit}){
-        //     return new Promise((resolve) => {
-        //         commit('logout')
-        //         console.log("hello from logout")
-        //         console.log(localStorage)
-        //         localStorage.removeItem('token')
-        //         delete axios.defaults.headers.common['Authorization']
-        //         resolve()
-        //     })
-        // },
+        LOGOUT({commit}) {
+            return new Promise((resolve) => {
+                commit('LOGOUT')
+                console.log("hello from logout")
+                console.log(localStorage)
+                localStorage.removeItem('token')
+                delete axios.defaults.headers.authorization
+                resolve()
+            })
+        },
 
     },
     getters: {
         ARTICLES(state) {
             return state.articles;
         },
-        // TOKEN(state){
-        //   return state.token;
+        // isLoggedIn(state){
+        //     console.log("Hello from isLoggedIN state.token")
+        //     state.token = !state.token
+        //     return !!state.token;
         // },
-        // isLoggedIn: state => !!state.token,
-        // authStatus: state => state.status,
+        isAuthenticated: state => !!state.token,
         SEARCH_VALUE(state) {
             return state.searchValue;
         }

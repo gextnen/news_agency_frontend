@@ -3,10 +3,7 @@
     <div class="container">
       <div class="header_cont">
         <div class="navbar-brand">
-<!--          <router-link to="/">-->
-<!--            <Logo/>-->
-<!--          </router-link>-->
-          <a href="/">
+          <a href="/" class="navbar-brand__logo">
             <Logo/>
           </a>
         </div>
@@ -22,19 +19,21 @@
             </router-link>
           </li>
           <li class="nav-item">
-          
-            <router-link to="/AdminPanel">
-              <a class="nav-link">Panel</a>
-            </router-link>
-
+            <span v-if="isLoggedIn">
+              <router-link to="/AdminPanel">
+                <a class="nav-link">Panel</a>
+              </router-link>
+            </span>
           </li>
           <li class="nav-item">
            <span v-if="isLoggedIn">
+<!--           <span>-->
               <router-link to="/">
                   <a class="nav-link" @click="logout">logout</a>
               </router-link>
            </span>
             <span v-else>
+<!--            <span>-->
             <router-link to="/Authorization">
                 <a class="nav-link">login</a>
             </router-link>
@@ -60,16 +59,17 @@ export default {
   computed: {
     isLoggedIn: function () {
       console.log("Hello from comuted ISLOGGEDIN")
-      console.log("Значение isLoggedIn", this.$store.getters.isLoggedIn)
-      return this.$store.getters.isLoggedIn
+      console.log("Значение isAuthenticated", this.$store.getters.isAuthenticated)
+      return this.$store.getters.isAuthenticated
     }
 
   },
   methods: {
     logout: function () {
-      this.$store.dispatch('logout')
+      this.$store.dispatch('LOGOUT')
           .then(() => {
-            this.$router.push('/').catch(() => {
+            console.log("Вы вышли из системы")
+            this.$router.push('/Authorization').catch(() => {
             });
           })
     }
@@ -135,5 +135,14 @@ header {
 
 .nav-item {
   padding-right: 15px;
+}
+@media screen and (max-width: 340px){
+  .header-search__icon{
+    display: none;
+  }
+  .nav-item {
+    padding-right: 10px;
+  }
+
 }
 </style>

@@ -76,12 +76,7 @@ export default {
           console.log("Item: ", item)
         }
       })
-      this.updateArticles()
       },
-    updateArticles(){
-      this.$emit('update: sortedArticles', this.sortedArticles)
-      console.log("hello from updateArticles")
-    }
     }
 
 }
@@ -134,6 +129,8 @@ input, button:active, :hover, :focus {
   position: absolute;
   top: 25px;
   right: 0;
+  outline: 0;
+  outline-offset: 0;
 }
 
 

@@ -15,5 +15,14 @@ export default {
 </script>
 
 <style scoped>
-
+svg{
+  width: 64px;
+  height: 64px;
+}
+@media screen and (max-width: 320px){
+  svg{
+    width: 50px;
+    height: 50px;
+  }
+}
 </style>

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import store from "../../vuex/store";
+import store from "../../vuex/store";
 import Login from "@/components/Login";
 import AdminPanel from "@/components/adminPanel/v-admin-panel";
 // import ChangeNews from "@/components/v-change-news";
@@ -30,14 +30,14 @@ const routes = [
         path: '/login',
         name: 'login',
         component: Login,
-        meta: {
-            guest: true
-        }
     },
     {
         path: '/AdminPanel',
         name: 'AdminPanel',
         component:AdminPanel,
+        meta: {
+            requiresAuth: true
+        }
 
     },
     {
@@ -45,7 +45,7 @@ const routes = [
         name: 'AddNews',
         component: AddNews,
         meta: {
-            guest: true
+            requiresAuth: true
         }
     },
     {
@@ -53,7 +53,7 @@ const routes = [
         name: 'ChangeNews',
         component: () => import("@/components/adminPanel/v-change-news"),
         meta: {
-            guest: true
+            requiresAuth: true
         }
     },
     {
@@ -61,16 +61,13 @@ const routes = [
         name: 'DelNews',
         component: () => import("@/components/adminPanel/v-delete-news"),
         meta: {
-            guest: true
+            requiresAuth: true
         }
     },
     {
         path: '/Search',
         name: 'v-search',
         component: () => import("@/components/v-search"),
-        meta: {
-            guest: true
-        }
     }
 
 
@@ -83,16 +80,16 @@ const router = new VueRouter({
 })
 
 
-// router.beforeEach((to, from, next) => {
-//     if (to.matched.some(record => record.meta.requiresAuth)) {
-//         if (store.getters.isLoggedIn) {
-//             next()
-//             console.log("hello from router/index.js, beforeEach_func")
-//             return
-//         }
-//         next('/Authorization')
-//     } else {
-//         next()
-//     }
-// })
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (store.getters.isAuthenticated) {
+            next()
+            console.log("hello from router/index.js, beforeEach_func")
+            return
+        }
+        next('/Authorization')
+    } else {
+        next()
+    }
+})
 export default router
