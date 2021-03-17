@@ -2,11 +2,11 @@
   <div class="container">
     <div class="login-page">
       <div class="form">
-        <form class="login-form"  >
+        <form class="login-form">
           <input required v-model="login" type="text" placeholder="Login"/>
           <input required v-model="password" type="password" placeholder="Password"/>
 
-          <button type="submit" @click="handleSubmit" >login</button>
+          <button type="submit" @click="handleSubmit">login</button>
           <p class="message">Not registered? <a href="#">Create an account</a></p>
         </form>
       </div>
@@ -16,7 +16,6 @@
 
 <script>
 import axios from 'axios';
-import {mapGetters} from "vuex";
 
 export default {
   name: "Login",
@@ -26,13 +25,7 @@ export default {
       password: ""
     }
   },
-  computed: {
-    ...mapGetters([
-      'isLoggedIn',
-
-    ]),
-
-  },
+  computed: {},
   methods: {
     handleSubmit(e) {
       console.log("hello from handleSubmit() e:", e)
@@ -46,27 +39,20 @@ export default {
                 response => {
                   let token = response.data.accessToken;
                   axios.defaults.headers.authorization = "Bearer " + token;
-                  console.log("Hello from Login.vue, token = ", token)
-                  console.log("Hello from Login.vue, Bearer = ", axios.defaults.headers.authorization)
                   console.log(this)
                   this.$router.push('/')
-                  if (response.status === 200){
+                  if (response.status === 200) {
                     console.log(response.config.data, response);
                     localStorage.setItem('token', token)
                     console.log("localStorage after set: ", localStorage)
                   }
-
                 }
-
-      )
+            )
             .catch(function (error) {
               console.error(error.response);
               localStorage.removeItem('token')
             });
       }
-      // console.log(this.$http.get('http://localhost:5500/login'))
-
-
     },
 
   },
@@ -92,7 +78,7 @@ export default {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-  margin: 0 auto 100px;
+  margin: 0 auto;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);

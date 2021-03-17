@@ -2,42 +2,57 @@
   <div class="search-filter">
     <div class="search-filter__element">
       <div
-          class = "search-filter__element-title"
+          class="search-filter__element-title"
           v-bind:style="{ backgroundImage: 'url(' + iconSubmit + ')' }"
-          @click ="areOptionsVisible = !areOptionsVisible" >
-        {{selected}}
+          @click="areOptionsVisible = !areOptionsVisible">
+        {{ selected }}
       </div>
-        <div class="options"
-             v-if="areOptionsVisible"
-        >
-          <span class = "search-filter__list"
-              v-for="option in options"
-              :key="option.value"
-              @click = "selectOption(option)"
+      <div class="options"
+           v-if="areOptionsVisible"
+      >
+          <span class="search-filter__list"
+                v-for="option in options"
+                :key="option.value"
+                @click="selectOption(option)"
           >
-            {{option.name}}
+            {{ option.name }}
           </span>
-        </div>
+      </div>
     </div>
+    <v-catalog-news
+        :sortedArticles="sortedArticles"
+    />
   </div>
 </template>
 
 <script>
+
+import VCatalogNews from "@/components/v-catalog-news";
+
 export default {
   name: "v-selector",
+  components: {
+    VCatalogNews,
+  },
   props: {
     options: {
       type: Array,
-      default(){
+      default() {
         return []
       }
     },
     selected: {
       type: String,
       default: '',
+    },
+    sortedArticles: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
-  data: function (){
+  data: function () {
     return {
       areOptionsVisible: false,
       iconSubmit: "/arrow-down.svg"
@@ -49,7 +64,7 @@ export default {
       this.areOptionsVisible = false
       console.log(option)
     },
-    hideSelect(){
+    hideSelect() {
       this.areOptionsVisible = false
     }
   },
@@ -64,15 +79,17 @@ export default {
 </script>
 
 <style>
-.search-filter__element{
+.search-filter__element {
   position: relative;
   width: 200px;
   cursor: pointer;
 }
+
 .selector p {
   margin: 0;
 }
-.search-filter__element-title{
+
+.search-filter__element-title {
   border: 0;
   color: #00077b;
   font-size: 12px;
@@ -84,12 +101,13 @@ export default {
 
 }
 
-.search-filter__list{
+.search-filter__list {
   display: flex;
   flex-direction: column;
   padding: 7px;
 }
-.options{
+
+.options {
   background-color: #f7f7f7;
   box-shadow: 0 20px 18px rgba(41, 39, 89, 0.25);
   color: #00077b;
@@ -99,8 +117,10 @@ export default {
   margin: 5px;
   position: absolute;
   width: 100%;
+  z-index: 100;
 }
-.options span:hover{
+
+.options span:hover {
   background: #c5c3c3;
 }
 </style>

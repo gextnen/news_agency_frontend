@@ -1,5 +1,5 @@
 <template>
-  <header class="header"> <!-- TODO Шапку выдвигающуюся  fixed-top -->
+  <header class="header">
     <div class="container">
       <div class="header_cont">
         <div class="navbar-brand">
@@ -27,13 +27,11 @@
           </li>
           <li class="nav-item">
            <span v-if="isLoggedIn">
-<!--           <span>-->
               <router-link to="/">
                   <a class="nav-link" @click="logout">logout</a>
               </router-link>
            </span>
             <span v-else>
-<!--            <span>-->
             <router-link to="/Authorization">
                 <a class="nav-link">login</a>
             </router-link>
@@ -46,7 +44,6 @@
 </template>
 
 <script>
-// import logotype from 'src/assets/logo_news_agency.svg';
 import Logo from '@/components/icons/logo-news';
 import IconSearch from "@/components/icons/icon-search";
 
@@ -58,7 +55,7 @@ export default {
   },
   computed: {
     isLoggedIn: function () {
-      console.log("Hello from comuted ISLOGGEDIN")
+      console.log("Hello from computed isLoggedIn")
       console.log("Значение isAuthenticated", this.$store.getters.isAuthenticated)
       return this.$store.getters.isAuthenticated
     }
@@ -94,7 +91,6 @@ header {
   margin: 0 auto;
   padding: 0 5%;
   background: #f7f7f7;
-  /*position: relative;*/
 }
 
 .header-search {
@@ -109,9 +105,6 @@ header {
 }
 
 .navbar-brand {
-  /*font-size: 30px;*/
-  /*background: url("./src/assets/logo_news_agency.svg"); */
-  /*position: absolute;*/
   width: 74px;
   height: 100%;
   position: relative;
@@ -136,10 +129,12 @@ header {
 .nav-item {
   padding-right: 15px;
 }
-@media screen and (max-width: 340px){
-  .header-search__icon{
+
+@media screen and (max-width: 340px) {
+  .header-search__icon {
     display: none;
   }
+
   .nav-item {
     padding-right: 10px;
   }

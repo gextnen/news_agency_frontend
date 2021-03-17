@@ -2,26 +2,15 @@
   <main class="container">
     <section class="section-grid__row">
       <section class="section-grid-col">
-          <div class="v-catalog-news">
-            <div class="v-catalog-news__list">
-              <v-news-item
-                  v-for = "article in filteredArticles"
-                  :key ="article.id"
-                  :article_data = "article"
-              />
-<!--              <v-news-item-->
-<!--                  v-for = "article in ARTICLES"-->
-<!--                  :key ="article.id"-->
-<!--                  :article_data = "article"-->
-<!--              />-->
-<!--              <v-news-item-->
-<!--                  v-for = "article in ARTICLES"-->
-<!--                  :key ="article.id"-->
-<!--                  :article_data = "article"-->
-<!--              />-->
-            </div>
-
+        <div class="v-catalog-news">
+          <div class="v-catalog-news__list">
+            <v-news-item
+                v-for="article in filteredArticles"
+                :key="article.id"
+                :article_data="article"
+            />
           </div>
+        </div>
       </section>
       <section class="section-news-right">
       </section>
@@ -32,22 +21,27 @@
 <script>
 import vNewsItem from "@/components/v-news-item"
 import {mapActions, mapGetters} from 'vuex'
+
 export default {
   name: "v-catalog-news",
   components: {
     vNewsItem
   },
-  props: {},
-  data: function () {
-    return {
-      sortedArticles: [],
-      selected: '',
+  props: {
+    sortedArticles: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
+  },
+  data: function () {
+    return {}
   },
   computed: {
     ...mapGetters([
-        'ARTICLES',
-        'SEARCH_VALUE',
+      'ARTICLES',
+      'SEARCH_VALUE',
     ]),
     filteredArticles() {
       if (this.sortedArticles.length) {
@@ -63,74 +57,65 @@ export default {
     ]),
     sortArticlesByValue(value) {
       this.sortedArticles = [...this.ARTICLES]
-      if (value){
-        this.sortedArticles = this.sortedArticles.filter(function (item){
+      if (value) {
+        this.sortedArticles = this.sortedArticles.filter(function (item) {
           return item.title.toLowerCase().includes(value.toLowerCase())
         })
-      }
-      else {
+      } else {
         this.sortedArticles = this.ARTICLES
       }
 
     },
-
   },
   watch: {
-    SEARCH_VALUE(){
+    SEARCH_VALUE() {
       this.sortArticlesByValue(this.SEARCH_VALUE);
     }
   },
   mounted() {
-    console.log("hello from mounted ARTICLES: ", this.ARTICLES)
-    this.filteredProducts
-    this.sortedArticles = this.ARTICLES
+    console.log("hello from mounted ARTICLES: ")
     this.GET_ARTICLES_FROM_API()
-    console.log("hello from mounted", this.filteredProducts)
-    this.sortArticlesByValue(this.SEARCH_VALUE)
-    console.log("hello from mounted sortArticlesByValue", this.SEARCH_VALUE)
 
   }
 }
 </script>
 
 <style>
-body{
-  /*background-color: #f7f7f7;*/
-}
-
-.container{
+.container {
   padding: 0;
   margin: 0 auto;
   background-color: #ffffff;
   height: 100%;
 }
 
-.section-grid__row{
+.section-grid__row {
   display: flex;
   flex-wrap: nowrap;
   background-color: #ffffff;
 }
-.section-grid-col{
+
+.section-grid-col {
   width: 66.666%;
   border-right: 1px solid #dfdfe6;
 }
 
-.section-news-right{
+.section-news-right {
   width: 33.333%;
-  justify-content: flex-end ;
+  justify-content: flex-end;
 }
-.v-catalog-news{
+
+.v-catalog-news {
   margin-top: 56px;
-  /*background-color: #ffffff;*/
 
 }
 
 
-@media screen and (max-device-width: 1024px ){
-  .section-grid__row{
+@media screen and (max-device-width: 1024px ) {
+  .section-grid__row {
     flex-wrap: wrap;
   }
-  .section-grid-col{
+
+  .section-grid-col {
     width: 100%;
     border-right: 0;
   }

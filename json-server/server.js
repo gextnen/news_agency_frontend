@@ -23,16 +23,13 @@ server.use(jsonServer.bodyParser);
 // Protect admin paths
 server.use((req, res, next) => {
     let authorized = false;
-    console.log("Hello from server.use")
     if (req.method === 'GET' || req.path === '/login') {
         next();
     } else {
         const token = req.headers.authorization;
-        console.log("token: ", token)
 
         router.db.get('tokens').value().forEach((_token) => {
             if (token === 'Bearer ' + _token) {
-                console.log("authorized ", authorized)
                 authorized = true;
                 next();
             }
@@ -51,11 +48,9 @@ server.post('/login', (req, res) => {
             // Generate token
 
             const token = makeToken(100);
-            console.log("db.json: ", router.db.get('tokens').value())
 
             // Add token to DB
             router.db.get('tokens').push(token).write();
-            console.log("after db.json: ", router.db.get('tokens').value())
 
             res.json({
                 accessToken: token

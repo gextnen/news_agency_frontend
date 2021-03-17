@@ -3,10 +3,7 @@ import VueRouter from 'vue-router'
 import store from "../../vuex/store";
 import Login from "@/components/Login";
 import AdminPanel from "@/components/adminPanel/v-admin-panel";
-// import ChangeNews from "@/components/v-change-news";
 import AddNews from "@/components/adminPanel/v-add-news";
-// import DelNews from"@/components/v-delete-news";
-// import SearchNews from"@/components/v-search"
 Vue.use(VueRouter)
 
 const routes = [
@@ -34,7 +31,7 @@ const routes = [
     {
         path: '/AdminPanel',
         name: 'AdminPanel',
-        component:AdminPanel,
+        component: AdminPanel,
         meta: {
             requiresAuth: true
         }
@@ -49,9 +46,9 @@ const routes = [
         }
     },
     {
-        path: '/AdminPanel/ChangeNews',
-        name: 'ChangeNews',
-        component: () => import("@/components/adminPanel/v-change-news"),
+        path: '/AdminPanel/SelectId',
+        name: 'SelectId',
+        component: () => import("@/components/adminPanel/v-change-select-id"),
         meta: {
             requiresAuth: true
         }
