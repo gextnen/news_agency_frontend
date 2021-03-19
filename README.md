@@ -6,7 +6,7 @@ https://drive.google.com/file/d/1qA9UEQW-a3PeJkhoCWpb8nNsYsASSeTY/view?usp=shari
 Проект является вступительным заданием в RTU IT LAB 
 по направлению front-end
 
-##Использовал
+## Использовал
 * Vue JS 2.6.12
 * NodeJS 14.15.1
 * Intellij Idea
