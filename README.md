@@ -1,5 +1,7 @@
 # news_agency_frontend
 
+### Видеообзор доступен по ссылке
+https://drive.google.com/file/d/1qA9UEQW-a3PeJkhoCWpb8nNsYsASSeTY/view?usp=sharing
 ## О проекте
 Проект является вступительным заданием в RTU IT LAB 
 по направлению front-end
